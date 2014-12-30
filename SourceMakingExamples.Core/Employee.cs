@@ -10,62 +10,74 @@ namespace SourceMakingExamples.Core
 
         private EmployeeType EmployeeType { get; set; }
 
+        public int GetSalary 
+        {
+            get { return Salary; }
+        }
+
+        public int GetCommission 
+        {
+            get { return Commission; }
+        }
+
+        public int GetBonus 
+        {
+            get { return Bonus; }
+        }
+
         public Employee(EmployeeType type)
         {
             EmployeeType = type;
-        }
-
-        public int CalculatePayAmount()
-        {
-            switch (GetTypeCode())
-            {
-                case EmployeeType.ENGINEER:
-                    return Salary;
-                case EmployeeType.SALESMAN:
-                    return Salary + Commission;
-                case EmployeeType.MANAGER:
-                    return Salary + Bonus;
-            }
-
-            throw new Exception("This type of employee does not exist");
-        }
-
-        public int GetTypeCode()
-        {
-            return EmployeeType.GetEmployeeTypeCode();
         }
     }
 
     public abstract class EmployeeType
     {
-        public const int ENGINEER = 1;
-        public const int SALESMAN = 2;
-        public const int MANAGER = 3;
+        internal const int ENGINEER = 1;
+        internal const int SALESMAN = 2;
+        internal const int MANAGER = 3;
 
-        public abstract int GetEmployeeTypeCode();
+        internal abstract int GetEmployeeTypeCode();
+
+        public abstract int CalculatePayAmount(Employee employee);
     }
 
     public class Engineer : EmployeeType
     {
-        public override int GetEmployeeTypeCode()
+        internal override int GetEmployeeTypeCode()
         {
             return ENGINEER;
+        }
+
+        public override int CalculatePayAmount(Employee employee)
+        {
+            return employee.GetSalary;
         }
     }
 
     public class Salesman : EmployeeType
     {
-        public override int GetEmployeeTypeCode()
+        internal override int GetEmployeeTypeCode()
         {
             return SALESMAN;
+        }
+
+        public override int CalculatePayAmount(Employee employee)
+        {
+            return employee.GetSalary + employee.GetCommission;
         }
     }
 
     public class Manager : EmployeeType
     {
-        public override int GetEmployeeTypeCode()
+        internal override int GetEmployeeTypeCode()
         {
             return MANAGER;
+        }
+
+        public override int CalculatePayAmount(Employee employee)
+        {
+            return employee.GetSalary + employee.GetBonus;
         }
     }
 }

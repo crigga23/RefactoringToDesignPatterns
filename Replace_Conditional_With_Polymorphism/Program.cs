@@ -11,6 +11,42 @@ namespace Replace_Conditional_With_Polymorphism
             //ShowEmployeePayAmount();
             //ShowCustomerOrders();
 
+            EmployeeType engineer = new Engineer();
+            Employee employee1 = new Employee(engineer);
+            employee1.Salary = 25000;
+            employee1.Commission = 2000;
+            employee1.Bonus = 2000;
+
+            Console.WriteLine("Employee 1 Pay Amount:{0}\r\nSalary:{1}\r\nCommission:{2}\r\nBonus:{3}\r\n", 
+                engineer.CalculatePayAmount(employee1),
+                employee1.GetSalary, 
+                employee1.GetCommission,
+                employee1.GetBonus);
+
+            EmployeeType salesman = new Salesman();
+            Employee employee2 = new Employee(salesman);
+            employee2.Salary = 25000;
+            employee2.Commission = 2000;
+            employee2.Bonus = 2000;
+
+            Console.WriteLine("Employee 2 Pay Amount:{0}\r\nSalary:{1}\r\nCommission:{2}\r\nBonus:{3}\r\n",
+                salesman.CalculatePayAmount(employee2),
+                employee2.GetSalary,
+                employee2.GetCommission,
+                employee2.GetBonus);
+            
+            EmployeeType manager = new Manager();
+            Employee employee3 = new Employee(manager);
+            employee3.Salary = 25000;
+            employee3.Commission = 2000;
+            employee3.Bonus = 10000;
+
+            Console.WriteLine("Employee 3 Pay Amount:{0}\r\nSalary:{1}\r\nCommission:{2}\r\nBonus:{3}\r\n",
+                manager.CalculatePayAmount(employee3),
+                employee3.GetSalary,
+                employee3.GetCommission,
+                employee3.GetBonus);
+
             Console.ReadLine();
         }
 
